@@ -39,7 +39,7 @@ int main() {
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
-	} while (tolower(ok) == 'y');
+	} while (tolower(ok) != 'n');
 	system("pause");
 	return 0;
 }
