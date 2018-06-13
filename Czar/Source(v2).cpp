@@ -11,7 +11,6 @@ string Czar_Cryption(string&, const int&);
 string word;
 int key;
 char ok;
-bool t=false;
 
 int main() {
 	do{
@@ -25,12 +24,11 @@ int main() {
 		cout << "Input the key: ";
 		cin >> key;
 		// Crypt part
-		//fin >> word;
-		//fout << Czar_Cryption(word, key);
+		fin >> word;
+		fout << Czar_Cryption(word, key);
 		while (!fin.eof())
 		{
 			fin >> word;
-			if (t) fout << " "; else t = true;
 			fout << Czar_Cryption(word, key);
 		}
 		//Closing processes with files
