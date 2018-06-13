@@ -12,22 +12,26 @@ string word;
 int key;
 ifstream fin("text.txt");
 ofstream fout("output.txt");
-bool t=false;
 
 int main() {
 	cout << "This is realisation of the Czar cryption algorithm!\nBefore using the program, you must create a text file(text.txt) in the same program folder.\nCryption -> + key\nEncryption -> - key\n";
 	cout << "Input the key: ";
 	cin >> key;
+	// Crypt part
+	fin >> word;
+	fout << Czar_Cryption(word, key);
 	while (!fin.eof())
 	{
 		fin >> word;
-		if (t) fout << " ";else t = true;
-		fout << Czar_Cryption(word, key);
+		fout << " " << Czar_Cryption(word, key);
 	} 
+	//closing processes with files
 	fin.close();
 	fout.close();
+	// operations with files
 	if (remove("text.txt") & rename("output.txt", "text.txt")) cout << "Something had gone wrong!"; else cout << "Succes!";
 	cout << endl;
+	// end
 	system("pause");
 	return 0;
 }
