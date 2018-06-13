@@ -16,7 +16,7 @@ bool t=false;
 int main() {
 	do{
 		ifstream fin("text.txt"); // main file
-		ofstream fout("o.txt"); // temp file
+		ofstream fout("o.temp"); // temp file
 		system("cls"); // clearing console area
 		cout << fin.eof();
 		//instruction
@@ -37,7 +37,7 @@ int main() {
 		fin.close();
 		fout.close();
 		//Operations with files
-		if (!remove("text.txt") && !rename("o.txt", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
+		if (!remove("text.txt") && !rename("o.temp", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
