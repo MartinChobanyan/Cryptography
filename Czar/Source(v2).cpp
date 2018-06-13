@@ -8,33 +8,36 @@ using namespace std;
 
 string Czar_Cryption(string&, const int&);
 
-ifstream fin("text.txt");
 string word;
 int key;
 char ok;
+bool t=false;
 
 int main() {
 	do{
-		ofstream fout("o.temp"); // temp file
+		ifstream fin("text.txt"); // main file
+		ofstream fout("o.txt"); // temp file
 		system("cls"); // clearing console area
+		cout << fin.eof();
 		//instruction
 		cout << "This is realisation of the Czar cryption algorithm!\nBefore using the program, you must create a text file(text.txt) in the same program folder.\nCryption -> + key\nEncryption -> - key\n";
 		// key input
 		cout << "Input the key: ";
 		cin >> key;
 		// Crypt part
-		fin >> word;
-		fout << Czar_Cryption(word, key);
+		//fin >> word;
+		//fout << Czar_Cryption(word, key);
 		while (!fin.eof())
 		{
 			fin >> word;
-			fout << " " << Czar_Cryption(word, key);
+			if (t) fout << " "; else t = true;
+			fout << Czar_Cryption(word, key);
 		}
 		//Closing processes with files
 		fin.close();
 		fout.close();
 		//Operations with files
-		if (!remove("text.txt") && !rename("o.temp", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
+		if (!remove("text.txt") && !rename("o.txt", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
