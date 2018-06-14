@@ -10,11 +10,11 @@ char Czar_Cryption(char&, const int&); // Symbol Czar cryption
 string Czar_Cryption(string&, const int&); // Word Czar cryption
 string Hronsfeld_Cryption(string&, const string&); // Word Hronsfeld Cryption
 
-string word;
-string keyh;
-int keyc;
+string word; // file input stream reader var
+string keyh; // Hronsfeld key
+int keyc; // Czar key
 char ok;
-char mode;
+char mode; // Crypt/encrypt mode reader
 
 int main() {
 	do{
@@ -29,11 +29,12 @@ int main() {
 			cin >> mode;
 			mode = tolower(mode);
 		} while (mode != 'c' && mode != 'h');
+		
 		cout << "Input the key: ";
 		// Crypt part
 		switch (mode) {
-		case 'c':
-			cin >> keyc; // Czar key input
+		case 'c': // Czar
+			cin >> keyc; // czar key input
 
 			fin >> word;
 			fout << Czar_Cryption(word, keyc);
@@ -43,8 +44,8 @@ int main() {
 				fout << " " << Czar_Cryption(word, keyc);
 			}
 			break;
-		case 'h': 
-			cin >> keyh; // Hronsfeld key input
+		case 'h': // Hronsfeld 
+			cin >> keyh; // hronsfeld key input
 
 			fin >> word;
 			fout << Hronsfeld_Cryption(word, keyh);
