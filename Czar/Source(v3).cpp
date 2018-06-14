@@ -18,11 +18,16 @@ char mode; // Crypt/encrypt mode reader
 
 int main() {
 	do{
-		ifstream fin("text.txt"); // main file
-		ofstream fout("o.txt"); // temp file
 		system("cls"); // clearing console area
+		while (!ifstream("text.txt")) {
+			cout << "WARNING!!!: Before using the program, you must create a text file \"text.txt\" in the same program folder.\n";
+			system("pause");
+		}
+		system("cls"); // profilactic clearing
+		ifstream fin("text.txt"); // main file
+		ofstream fout("o.temp"); // temp file
 		//instruction
-		cout << "This is realisation of the Czar cryption algorithm!\nBefore using the program, you must create a text file(text.txt) in the same program folder.\nCryption -> + key\nEncryption -> - key" << endl;
+		cout << "This is realisation of the Czar and Hronsfeld cryption algorithm!\nChoose the crypt algorithm mode c(CZAR)/h(HRONSFELD).\nCryption -> + key\nEncryption -> - key" << endl;
 		// Mode selection
 		do {
 			cout << "Select mode Czar/Hronsfeld crypt algorithm(c/h): ";
@@ -59,7 +64,7 @@ int main() {
 		fin.close();
 		fout.close();
 		//Operations with files
-		if (!remove("text.txt") && !rename("o.txt", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
+		if (!remove("text.txt") && !rename("o.temp", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
