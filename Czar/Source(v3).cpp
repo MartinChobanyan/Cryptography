@@ -10,22 +10,22 @@ char Czar_Cryption(char&, const int&); // Symbol Czar cryption
 string Czar_Cryption(string&, const int&); // Word Czar cryption
 string Hronsfeld_Cryption(string&, const string&); // Word Hronsfeld Cryption
 
-string word; // file input stream reader var
+string word; // File input stream reader var
 string keyh; // Hronsfeld key
 int keyc; // Czar key
-char ok;
+char ok; // Loop accepter
 char mode; // Crypt/encrypt mode reader
 
 int main() {
 	do{
-		system("cls"); // clearing console area
+		system("cls"); // Clearing console area
 		while (!ifstream("text.txt")) {
 			cout << "WARNING!!!: Before using the program, you must create a text file \"text.txt\" in the same program folder.\n";
 			system("pause");
+			system("cls"); // Warn clearing
 		}
-		system("cls"); // profilactic clearing
-		ifstream fin("text.txt"); // main file
-		ofstream fout("o.temp"); // temp file
+		ifstream fin("text.txt"); // Main file
+		ofstream fout("o.temp"); // Temp file
 		//instruction
 		cout << "This is realisation of the Czar and Hronsfeld cryption algorithm!\nChoose the crypt algorithm mode c(CZAR)/h(HRONSFELD).\nCryption -> + key\nEncryption -> - key" << endl;
 		// Mode selection
@@ -39,7 +39,7 @@ int main() {
 		// Crypt part
 		switch (mode) {
 		case 'c': // Czar
-			cin >> keyc; // czar key input
+			cin >> keyc; // Czar key input
 
 			fin >> word;
 			fout << Czar_Cryption(word, keyc);
@@ -50,7 +50,7 @@ int main() {
 			}
 			break;
 		case 'h': // Hronsfeld 
-			cin >> keyh; // hronsfeld key input
+			cin >> keyh; // Hronsfeld key input
 
 			fin >> word;
 			fout << Hronsfeld_Cryption(word, keyh);
@@ -60,10 +60,10 @@ int main() {
 				fout << " " << Hronsfeld_Cryption(word, keyh);
 			}
 		}
-		//Closing processes with files
+		// Closing processes with files
 		fin.close();
 		fout.close();
-		//Operations with files
+		// Operations with files
 		if (!remove("text.txt") && !rename("o.temp", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
