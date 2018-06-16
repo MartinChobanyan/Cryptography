@@ -13,11 +13,11 @@ string keyh; // Hronsfeld
 int keyc; // Czar key
 char ch, ok, mode; // file input stream symbols reader // Loop accepter // Crypt/encrypt mode reader
 
-unsigned int i; // kostil before better realisation of hronsfeld crypt algorithm CHANGE!
+unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of hronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
 	do{
-		::i = 0; // for hronsfeld CHANGE! 
+		::i = 0; // for hronsfeld char counter RESET OPERATION // TODO:CHANGE! 
 
 		system("cls"); // Clearing console area
 		while (!ifstream("text.txt")) {
@@ -42,10 +42,8 @@ int main() {
 		else 
 			cin >> keyh; // Hronsfeld key input
 		// Crypt part
-		while (!fin.eof() && fin.get(ch))
-		{
-				if (mode == 'c') fout << Czar_Cryption(ch, keyc); else fout << Hronsfeld_Cryption(ch, keyh);
-		}
+		while (!fin.eof() && fin.get(ch)) 
+			fout.put(mode == 'c' ? Czar_Cryption(ch, keyc) : Hronsfeld_Cryption(ch, keyh));
 		// Closing processes with files
 		fin.close();
 		fout.close();
@@ -61,12 +59,10 @@ int main() {
 
 // Encrypt/Decrypt functions
 
-inline char Czar_Cryption(char& symbol, const int& key) {
-	symbol = (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
-	return symbol;
+inline char Czar_Cryption(char& symbol, const int& key) { 
+	return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
 }
 
 inline char Hronsfeld_Cryption(char& symbol, const string& key) {
-	symbol = (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? (key[0] > 47 && key[0] < 57) || (key[0]=='+' || key[0]=='-') ? Czar_Cryption(symbol, key[0]!='+' && key[0]!='-' ? key[::i++ % (int)key.size()] - '0': key[0] == '+' ? key[::i++ % ((int)key.size()-1)+1] - '0': -(key[::i++ % ((int)key.size() - 1) + 1] - '0')):'#':symbol;
-	return symbol;
+	return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? (key[0] > 47 && key[0] < 57) || (key[0] == '+' || key[0] == '-') ? Czar_Cryption(symbol, key[0] != '+' && key[0] != '-' ? key[::i++ % (int)key.size()] - '0' : key[0] == '+' ? key[::i++ % ((int)key.size() - 1) + 1] - '0' : -(key[::i++ % ((int)key.size() - 1) + 1] - '0')) : '#' : symbol;
 }
