@@ -41,7 +41,7 @@ int main() {
 			cin >> keyc; // Czar key input 
 		else
 			cin >> keyg; // Gronsfeld key input
-		// Crypt part
+		// (En/De)crypt part
 		while (!fin.eof() && fin.get(ch))
 			fout.put(mode == 'c' ? Czar_Cryption(ch, keyc) : Gronsfeld_Cryption(ch, keyh));
 		// Closing processes with files
