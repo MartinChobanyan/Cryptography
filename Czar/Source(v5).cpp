@@ -63,7 +63,7 @@ int main() {
 		fin.close();
 		fout.close();
 		// Operations with files
-		if (!remove("text.txt") && !rename("o.temp", "text.txt")) cout << "Succes!"; else cout << "Something had gone wrong!";
+		if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cout << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
@@ -87,14 +87,7 @@ bool keychecker(const int& keyc) {
 }
 
 bool keychecker(const string& keyg) {
-	for (int i = 0; i < (int)keyg.size(); i++) {
-		if (i == 0) {
-			if (keyg[i] != '+' || keyg[i] != '-') {
-				if (keyg[i] < '0' || keyg[i] > '9') return false;
-			}
-			else "Good";
-		}
-		else if (keyg[i] < '0' || keyg[i] > '9') return false;
-	}
+	if (keyg.size() < 2 && keyg[0] != '+' && keyg[0] != '-' && (keyg[0]<'0' && keyg[0]>'9')) return false;
+	for (int i = 1; i < (int)keyg.size(); i++) if (keyg[i] < '0' || keyg[i] > '9') return false;
 	return true;
 }
