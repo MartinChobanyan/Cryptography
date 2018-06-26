@@ -47,7 +47,7 @@ int main() {
 					cin >> keyc; // Czar key input
 				}
 				catch (const istream::failure& e) {
-					cerr << "Error on input key!" << endl;
+					cerr << "Error on key input!" << endl;
 					system("pause");
 					cin.clear(); // istream cleaner
 				}
@@ -63,7 +63,7 @@ int main() {
 		fin.close();
 		fout.close();
 		// Operations with files
-		if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cout << "Something had gone wrong!";
+		if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cerr << "Something had gone wrong!";
 		// Repeating? part
 		cout << "\n Do you want to repeat?(y/n): ";
 		cin >> ok;
