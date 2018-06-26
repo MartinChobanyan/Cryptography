@@ -35,12 +35,11 @@ int main() {
 			cout << "Select mode Czar/Gronsfeld crypt algorithm(c/g): ";
 			cin >> mode;
 			mode = tolower(mode);
-		} while (mode != 'c' && mode != 'g');
-
-		cin.exceptions(istream::failbit | istream::badbit); // for catching error inputs 
+		} while (mode != 'c' && mode != 'g'); 
 		
+		cin.exceptions(istream::failbit | istream::badbit); // for catching error inputs
+
 		do {
-			bool i = true; // temp bool
 			cout << "Input the key: ";
 			if (mode == 'c') {
 				// input type err catcher block
@@ -48,13 +47,14 @@ int main() {
 					cin >> keyc; // Czar key input
 				}
 				catch (const istream::failure& e) {
+					cerr << "Error on input key!" << endl;
+					system("pause");
 					cin.clear(); // istream cleaner
-					i = false; // wrong(false) type input
 				}
 			}
 			else
 				cin >> keyg; // Gronsfeld key input
-		} while (!i && mode == 'c' ? !keychecker(keyc) : !keychecker(keyg));
+		} while (mode == 'c' ? !keychecker(keyc) : !keychecker(keyg));
 		// Crypt part
 		while (!fin.eof()) // Checking for End Of File
 			if(fin.get(ch)) // Checking istream chars
