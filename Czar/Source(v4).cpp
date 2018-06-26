@@ -31,7 +31,7 @@ int main() {
 		cout << "This is the implementation of encryption algorithms Czar and Greensfeld!\nSelect the encryption algorithm c(CZAR)/g(GRONSFELD).\nEncryption -> + key\nDecryption -> - key" << endl;
 		// Mode selection
 		do {
-			cout << "Select mode Czar/Gronsfeld crypt algorithm(c/h): ";
+			cout << "Select mode Czar/Gronsfeld crypt algorithm(c/g): ";
 			cin >> mode;
 			mode = tolower(mode);
 		} while (mode != 'c' && mode != 'g');
