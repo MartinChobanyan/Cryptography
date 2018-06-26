@@ -19,8 +19,8 @@ unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of G
 
 int main() {
 	cout << "This is the implementation of encryption algorithms Czar and Greensfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
-	cin >> filename;
-	while (!ifstream(filename)) cout << "You must write the correct file name: ", cin >> filename;
+	getline(cin, filename);
+	while (!ifstream(filename)) cout << "You must write the correct file name: ", getline(cin, filename);
 
 	do {
 		::i = 0; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE! 
