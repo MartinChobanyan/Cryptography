@@ -6,35 +6,35 @@
 
 using namespace std;
 
-inline char Czar_Cryption(char&, const int&); // Czar cryption
-inline char Gronsfeld_Cryption(char&, const string&); // Gronsfeld Cryption
-bool keychecker(const int&); // Czar keychecker
+inline char Czar_Cryption(char&, const int&); // Czar (En/De)cryption Function
+inline char Gronsfeld_Cryption(char&, const string&); // Gronsfeld (En/De)cryption Function
+inline bool keychecker(int&); // Czar keychecker
 bool keychecker(const string&); // Gronsfeld keychecker
 
-string keyg, filename; // Gronsfeld // (En/De)crypt file name
+string keyg, filename; // Gronsfeld // (En/De)cryption file name
 int keyc; // Czar key
-char ch, ok, mode; // file input stream symbols reader // Loop accepter // Crypt/encrypt mode reader
+char ch, ok, mode; // file input stream symbols reader // Loop accepter // (En/De)crypt mode reader
 
-unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
+unsigned short int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
     system("clear"); // clearing console area before starting
 
-    cout << "This is the implementation of encryption algorithms Czar and Greensfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
+    cout << "This is the implementation of encryption algorithms Czar and Gronsfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
     getline(cin, filename);
     while (!ifstream(filename)) cout << "You must write the correct file name: ", getline(cin, filename);
 
     do {
-        ::i = 0; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
+        ::i = -1; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
 
         system("clear"); // Clearing console area
         ifstream fin(filename); // Main file
         ofstream fout("o.temp"); // Temp file
         //instruction
-        cout << "Select the encryption algorithm c(CZAR)/g(GRONSFELD).\nEncryption -> + key\nDecryption -> - key" << endl;
+        cout << "Select the encrypt algorithm mode -> c(CZAR)/g(GRONSFELD).\nEncryption -> + key\nDecryption -> - key" << endl;
         // Mode selection
         do {
-            cout << "Select mode Czar/Gronsfeld crypt algorithm(c/g): ";
+            cout << "Select the encrypt algorithm mode(c/g): ";
             cin >> mode;
             mode = tolower(mode);
         } while (mode != 'c' && mode != 'g');
@@ -65,25 +65,24 @@ int main() {
         // Operations with files
         if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cerr << "Something had gone wrong!";
         // Repeating? part
-        cout << "\n Do you want to repeat?(y/n): ";
+        cout << "\n Do you want to continue ciphering?(y/n): ";
         cin >> ok;
     } while (tolower(ok) != 'n');
     return 0;
 }
 
-// Encrypt/Decrypt functions
+// Encryption/Decryption functions
 
 inline char Czar_Cryption(char& symbol, const int& key) {
-    return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
 }
 
 inline char Gronsfeld_Cryption(char& symbol, const string& key) {
-    return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[::i++ % (int)key.size()] - '0' : (key[0] == '+') ? key[::i++ % ((int)key.size() - 1) + 1] - '0' : -(key[::i++ % ((int)key.size() - 1) + 1] - '0')) : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
 }
 
-bool keychecker(const int& keyc) {
-    ::keyc = keyc>0 ? keyc % 26 : -(-keyc%26);
-    return true;
+inline bool keychecker(const int& keyc) {
+    return keyc %= 26;
 }
 
 bool keychecker(const string& keyg) {
