@@ -8,14 +8,14 @@ using namespace std;
 
 inline char Czar_Cryption(char&, const int&); // Czar cryption
 inline char Gronsfeld_Cryption(char&, const string&); // Gronsfeld Cryption
-bool keychecker(const int&); // Czar keychecker
+inline bool keychecker(int&); // Czar keychecker
 bool keychecker(const string&); // Gronsfeld keychecker
 
 string keyg, filename; // Gronsfeld // (En/De)crypt file name
 int keyc; // Czar key
 char ch, ok, mode; // file input stream symbols reader // Loop accepter // Crypt/encrypt mode reader
 
-unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
+unsigned short i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
     cout << "This is the implementation of encryption algorithms Czar and Greensfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
@@ -23,7 +23,7 @@ int main() {
     while (!ifstream(filename)) cout << "You must write the correct file name: ", getline(cin, filename);
 
     do {
-        ::i = 0; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
+        ::i = -1; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
 
         cout << endl; // for diferencing texts
 
@@ -73,16 +73,15 @@ int main() {
 // Encrypt/Decrypt functions
 
 inline char Czar_Cryption(char& symbol, const int& key) {
-    return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
 }
 
 inline char Gronsfeld_Cryption(char& symbol, const string& key) {
-    return (symbol > 64 && symbol < 91) || (symbol > 96 && symbol < 123) ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[::i++ % (int)key.size()] - '0' : (key[0] == '+') ? key[::i++ % ((int)key.size() - 1) + 1] - '0' : -(key[::i++ % ((int)key.size() - 1) + 1] - '0')) : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol < 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
 }
 
-bool keychecker(const int& keyc) {
-    ::keyc = keyc>0 ? keyc % 26 : -(-keyc%26);
-    return true;
+inline bool keychecker(int& keyc) {
+    return keyc %= 26;
 }
 
 bool keychecker(const string& keyg) {
