@@ -65,7 +65,7 @@ int main() {
         // Operations with files
         if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cerr << "Something had gone wrong!";
         // Repeating? part
-        cout << "\n Do you want to continue encrption of this file?(y/n): ";
+        cout << "\n Do you want to continue encryption of this file?(y/n): ";
         cin >> ok;
     } while (tolower(ok) != 'n');
     return 0;
@@ -78,7 +78,7 @@ inline char Czar_Cryption(char& symbol, const int& key) {
 }
 
 inline char Gronsfeld_Cryption(char& symbol, const string& key) {
-    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[::i++ % (int)key.size()] - '0' : (key[0] == '+') ? key[::i++ % ((int)key.size() - 1) + 1] - '0' : -(key[::i++ % ((int)key.size() - 1) + 1] - '0')) : symbol;
 }
 
 inline bool keychecker(const int& keyc) {
