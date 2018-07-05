@@ -6,19 +6,19 @@
 
 using namespace std;
 
-inline char Czar_Cryption(const char&, const int&); // Czar cryption
-inline char Gronsfeld_Cryption(const char&, const string&); // Gronsfeld Cryption
+inline char Czar_Cryption(const char&, const int&); // Czar (En/De)cryption Function
+inline char Gronsfeld_Cryption(const char&, const string&); // Gronsfeld (En/De)ryption Function
 inline bool keychecker(int&); // Czar keychecker
 bool keychecker(const string&); // Gronsfeld keychecker
 
-string keyg, filename; // Gronsfeld // ciphering file name 
+string keyg, filename; // Gronsfeld key // name of the file for encryption 
 int keyc; // Czar key
-char ch, ok, mode; // file input stream symbols reader // Loop accepter // Crypt/encrypt mode reader
+char ch, ok, mode; // file input stream symbols reader // Loop accepter // (En/De)crypt mode reader
 
 unsigned short int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
-	cout << "This is the implementation of encryption algorithms Czar and Greensfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
+	cout << "This is the implementation of encryption algorithms Czar and Gronsfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
 	getline(cin, filename);
 	while (!ifstream(filename)) cout << "You must write the correct file name: ", getline(cin, filename);
 
@@ -29,10 +29,10 @@ int main() {
 		ifstream fin(filename); // Main file
 		ofstream fout("o.temp"); // Temp file
 		//instruction
-		cout << "Select the encryption algorithm c(CZAR)/g(GRONSFELD).\nEncryption -> + key\nDecryption -> - key";
+		cout << "Select the encrypt algorithm mode -> c(CZAR)/g(GRONSFELD).\nEncryption -> + key\nDecryption -> - key";
 		// Mode selection
 		do {
-			cout << endl << "Select mode Czar/Gronsfeld cipher algorithm(c/g): ";
+			cout << endl << "Select the encrypt algorithm mode(c/g): ";
 			cin >> mode;
 			mode = tolower(mode);
 		} while (mode != 'c' && mode != 'g'); 
@@ -65,13 +65,13 @@ int main() {
 		// Operations with files
 		if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cerr << "Something had gone wrong!";
 		// Continue? part
-		cout << "\n Do you want to continue ciphering?(y/n): ";
+		cout << "\n Do you want to continue encryption of this file?(y/n): ";
 		cin >> ok;
 	} while (tolower(ok) != 'n');
 	return 0;
 }
 
-// Encrypt/Decrypt functions
+// Encryption/Decryption Functions
 
 inline char Czar_Cryption(const char& symbol, const int& key) {
 	return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
