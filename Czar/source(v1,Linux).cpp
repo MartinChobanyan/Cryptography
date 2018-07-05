@@ -65,7 +65,7 @@ int main() {
         // Operations with files
         if (!remove(filename.c_str()) && !rename("o.temp", filename.c_str())) cout << "Succes!"; else cerr << "Something had gone wrong!";
         // Repeating? part
-        cout << "\n Do you want to continue ciphering?(y/n): ";
+        cout << "\n Do you want to continue encrption of this file?(y/n): ";
         cin >> ok;
     } while (tolower(ok) != 'n');
     return 0;
