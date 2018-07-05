@@ -77,7 +77,7 @@ inline char Czar_Cryption(char& symbol, const int& key) {
 }
 
 inline char Gronsfeld_Cryption(char& symbol, const string& key) {
-    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol < 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol < 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[::i++ % (int)key.size()] - '0' : (key[0] == '+') ? key[::i++ % ((int)key.size() - 1) + 1] - '0' : -(key[::i++ % ((int)key.size() - 1) + 1] - '0')) : symbol;
 }
 
 inline bool keychecker(int& keyc) {
