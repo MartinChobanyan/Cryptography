@@ -15,7 +15,7 @@ string keyg, filename; // Gronsfeld // (En/De)cryption file name
 int keyc; // Czar key
 char ch, ok, mode; // file input stream symbols reader // Loop accepter // (En/De)crypt mode reader
 
-unsigned short i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
+unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
     cout << "This is the implementation of encryption algorithms Czar and Gronsfeld!\n\nWrite the file name, which must be (En/De)crypted: ";
