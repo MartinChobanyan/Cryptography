@@ -8,7 +8,7 @@ using namespace std;
 
 inline char Czar_Cryption(const char&, const int&); // Czar cryption
 inline char Gronsfeld_Cryption(const char&, const string&); // Gronsfeld Cryption
-bool keychecker(int&); // Czar keychecker
+inline bool keychecker(int&); // Czar keychecker
 bool keychecker(const string&); // Gronsfeld keychecker
 
 string keyg, filename; // Gronsfeld // ciphering file name 
@@ -74,15 +74,15 @@ int main() {
 // Encrypt/Decrypt functions
 
 inline char Czar_Cryption(const char& symbol, const int& key) {
-	return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol < 'Z') ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
+	return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? islower(symbol) ? (symbol - 19 + key) % 26 + 'a' : (symbol - 13 + key) % 26 + 'A' : symbol;
 }
 
 inline char Gronsfeld_Cryption(const char& symbol, const string& key) {
-	return (symbol >= 'a' && symbol <= 'z') || (symbol > 'A' && symbol < 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
+	return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ? Czar_Cryption(symbol, (key[0] != '+' && key[0] != '-') ? key[++::i %= (int)key.size()] - '0' : (key[0] == '+') ? key[++::i %= ((int)key.size() - 1) + 1] - '0' : -(key[++::i %= ((int)key.size() - 1) + 1] - '0')) : symbol;
 }
 
-bool keychecker(int& keyc) {
-	return keyc%26;
+inline bool keychecker(int& keyc) {
+	return keyc %= 26;
 }
 
 bool keychecker(const string& keyg) {
