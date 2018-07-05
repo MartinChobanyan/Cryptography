@@ -15,7 +15,7 @@ string keyg, filename; // Gronsfeld // (En/De)cryption file name
 int keyc; // Czar key
 char ch, ok, mode; // file input stream symbols reader // Loop accepter // (En/De)crypt mode reader
 
-unsigned short int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
+unsigned long long int i; // kostil ((((MAYBE)))) before better realisation of Gronsfeld crypt algorithm // TODO: CHANGE!
 
 int main() {
     system("clear"); // clearing console area before starting
