@@ -23,7 +23,7 @@ int main() {
     while (!ifstream(filename)) cout << "You must write the correct file name: ", getline(cin, filename);
 
     do {
-        ::i = -1; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
+        ::i = 0; // for Gronsfeld char counter RESET OPERATION // TODO:CHANGE!
 
         cout << endl; // for diferencing texts
 
